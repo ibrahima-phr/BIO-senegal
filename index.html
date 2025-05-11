@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioSénégal - Produits naturels du Sénégal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS Reset et variables */
+        :root {
+            --primary-color: #2e8b57;
+            --secondary-color: #f5f5dc;
+            --accent-color: #d2691e;
+            --text-color: #333;
+            --light-text: #fff;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 1rem 0;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary-color);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary-color);
+        }
+
+        .cart-icon {
+            position: relative;
+            font-size: 1.3rem;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.7rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1606787366850-de6330128bfc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--light-text);
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--light-text);
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #b35917;
+        }
+
+        /* Featured Products */
+        .section-title {
+            text-align: center;
+            margin: 3rem 0 2rem;
+            font-size: 2rem;
+            color: var(--primary-color);
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-image::after {
+            content: "Cliquez pour ajouter au panier";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 0.5rem;
+            text-align: center;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .product-image:hover::after {
+            transform: translateY(0);
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-price {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-description {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            padding: 0.7rem;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .add-to-cart:hover {
+            background-color: #1f6a3d;
+        }
+
+        /* About Section */
+        .about {
+            background-color: var(--secondary-color);
+            padding: 4rem 0;
+            margin: 3rem 0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .about-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .about-text h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 3rem 0;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--light-text);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-column ul li a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--light-text);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: var(--light-text);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Cart Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 200;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            padding: 1rem;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            padding: 1rem;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .cart-items {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .cart-items th {
+            text-align: left;
+            padding: 0.5rem;
+            border-bottom: 2px solid #eee;
+        }
+
+        .cart-items td {
+            padding: 1rem 0.5rem;
+            border-bottom: 1px solid #eee;
+            vertical-align: middle;
+        }
+
+        .cart-item-image {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .quantity-control {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity-btn {
+            background-color: #eee;
+            border: none;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .quantity-input {
+            width: 40px;
+            text-align: center;
+            margin: 0 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 0.2rem;
+        }
+
+        .remove-item {
+            color: #ff4444;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .modal-footer {
+            padding: 1rem;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cart-total {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .checkout-btn {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background-color: #b35917;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0 0.7rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-image {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                height: 50vh;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .products {
+                grid-template-columns: 1fr;
+            }
+            /* Admin Panel */
+#orders-list {
+    margin-top: 1rem;
+}
+
+.order-card {
+    background: white;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    box-shadow: var(--shadow);
+}
+
+.order-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.order-user {
+    font-weight: bold;
+}
+
+.order-date {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.order-items {
+    margin-top: 0.5rem;
+}
+
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.3rem;
+}
+
+.order-total {
+    font-weight: bold;
+    margin-top: 0.5rem;
+    text-align: right;
+    border-top: 1px solid #eee;
+    padding-top: 0.5rem;
+}
+
+/* Login/Register forms */
+textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+    min-height: 80px;
+}
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-leaf"></i>
+                    BioSénégal
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#accueil">Accueil</a></li>
+                        <li><a href="#produits">Produits</a></li>
+                        <li><a href="#apropos">À propos</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li>
+                            <a href="#" id="cart-button" class="cart-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                                <span class="cart-count">0</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="accueil">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Découvrez les trésors naturels du Sénégal</h1>
+                <p>Des produits bio et naturels, cultivés avec amour et respect pour la terre</p>
+                <a href="#produits" class="btn">Découvrir nos produits</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="container" id="produits">
+        <h2 class="section-title">Nos Produits Bio</h2>
+        <div class="products" id="products-container">
+            <!-- Produits seront ajoutés dynamiquement avec JavaScript -->
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="apropos">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Notre Engagement</h2>
+                    <p>BioSénégal est né de la passion pour les produits naturels et du respect pour les traditions agricoles sénégalaises. Nous travaillons directement avec les producteurs locaux pour vous offrir des produits de la plus haute qualité.</p>
+                    <p>Chaque produit que nous proposons est cultivé sans pesticides ni engrais chimiques, dans le respect de l'environnement et des savoir-faire traditionnels.</p>
+                    <p>En choisissant BioSénégal, vous soutenez non seulement votre santé mais aussi l'économie locale et le développement durable.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Agriculture biologique au Sénégal">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Témoignages</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Les produits BioSénégal ont transformé ma cuisine. La qualité est exceptionnelle et le goût authentique rappelle les saveurs de mon enfance."</p>
+                    <p class="testimonial-author">- Aïssatou D., Dakar</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Je commande régulièrement depuis la France. C'est un vrai plaisir de retrouver les saveurs du Sénégal avec des produits aussi frais et naturels."</p>
+                    <p class="testimonial-author">- Jean-Paul M., Paris</p>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"En tant que nutritionniste, je recommande vivement les produits BioSénégal à mes clients. Leur qualité nutritionnelle est incomparable."</p>
+                    <p class="testimonial-author">- Dr. Aminata S., Diététicienne</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>BioSénégal</h3>
+                    <p>Votre source de produits bio et naturels du Sénégal. Qualité, authenticité et respect de la terre.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Liens utiles</h3>
+                    <ul>
+                        <li><a href="#accueil">Accueil</a></li>
+                        <li><a href="#produits">Produits</a></li>
+                        <li><a href="#apropos">À propos</a></li>
+                        <li><a href="#">Mentions légales</a></li>
+                        <li><a href="#">Politique de confidentialité</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Rue des Baobabs, Dakar, Sénégal</li>
+                        <li><i class="fas fa-phone"></i> +221 77 123 45 67</li>
+                        <li><i class="fas fa-envelope"></i> contact@biosenegal.com</li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Abonnez-vous pour recevoir nos offres spéciales et actualités.</p>
+                    <form id="newsletter-form">
+                        <input type="email" placeholder="Votre email" required>
+                        <button type="submit" class="btn">S'abonner</button>
+                    </form>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 BioSénégal. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Modal -->
+    <div class="modal" id="cart-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Votre Panier</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table class="cart-items">
+                    <thead>
+                        <tr>
+                            <th>Produit</th>
+                            <th>Prix</th>
+                            <th>Quantité</th>
+                            <th>Total</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-items-container">
+                        <!-- Items du panier seront ajoutés dynamiquement -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <div class="cart-total">
+                    Total: <span id="cart-total">0</span> FCFA
+                </div>
+                <button class="checkout-btn">Passer la commande</button>
+            </div>
+        </div>
+    </div>
+    <!-- Login Modal -->
+<div class="modal" id="login-modal">
+    <div class="modal-content" style="max-width: 400px;">
+        <div class="modal-header">
+            <h3>Connexion</h3>
+            <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="login-form">
+                <div style="margin-bottom: 1rem;">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="login-password">Mot de passe</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <button type="submit" class="btn">Se connecter</button>
+            </form>
+            <p style="margin-top: 1rem; text-align: center;">
+                Pas de compte? <a href="#" id="show-register">S'inscrire</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Register Modal -->
+<div class="modal" id="register-modal">
+    <div class="modal-content" style="max-width: 400px;">
+        <div class="modal-header">
+            <h3>Inscription</h3>
+            <button class="close-modal">&times;</button>
+        </div>
+        <div class="modal-body">
+            <form id="register-form">
+                <div style="margin-bottom: 1rem;">
+                    <label for="register-name">Nom complet</label>
+                    <input type="text" id="register-name" required>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="register-email">Email</label>
+                    <input type="email" id="register-email" required>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="register-password">Mot de passe</label>
+                    <input type="password" id="register-password" required>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="register-address">Adresse</label>
+                    <textarea id="register-address" required></textarea>
+                </div>
+                <button type="submit" class="btn">S'inscrire</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Admin Panel Link (visible only when admin is logged in) -->
+<div id="admin-panel-link" style="display: none; position: fixed; bottom: 20px; right: 20px;">
+    <a href="#admin" class="btn" style="background-color: #ff5722;">Admin Panel</a>
+</div>
+
+<!-- Admin Panel -->
+<section id="admin" style="display: none; padding: 2rem 0;">
+    <div class="container">
+        <h2 class="section-title">Panneau d'Administration</h2>
+        <div id="admin-content">
+            <h3>Commandes Récentes</h3>
+            <div id="orders-list"></div>
+        </div>
+    </div>
+</section>
+
+    <script>
+        // Données des produits
+        const products = [
+            {
+                id: 1,
+                name: "Huile de Baobab",
+                price: 4500,
+                description: "Huile vierge extraite des graines de baobab, riche en vitamines et antioxydants.",
+                image: "https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            },
+            {
+                id: 2,
+                name: "Miel de Fleurs Sauvages",
+                price: 6000,
+                description: "Miel pur récolté dans les forêts du Sénégal, non pasteurisé et riche en nutriments.",
+                image: "https://images.unsplash.com/photo-1587049352851-8d4e89133924?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            },
+            {
+                id: 4,
+                name: "Noix de Cajou Grillées",
+                price: 5000,
+                description: "Noix de cajou biologiques grillées à la perfection, sans additifs ni conservateurs.",
+                image: "https://images.unsplash.com/photo-1550583724-b2692b85b150?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            },
+             ,
+            {
+                id: 6,
+                name: "Fonio Bio",
+                price: 3000,
+                description: "Céréale ancestrale sans gluten, riche en protéines et facile à digérer.",
+                image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            },
+            {
+                id: 7,
+                name: "Confiture de Mangue",
+                price: 2500,
+                description: "Confiture artisanale à base de mangues mûres à point, sans colorants ni conservateurs.",
+                image: "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            },
+            {
+                id: 8,
+                name: "Café Touba",
+                price: 5500,
+                description: "Café traditionnel sénégalais parfumé aux grains de selim, torréfié à l'ancienne.",
+                image: "https://images.unsplash.com/photo-1511920170033-f8396924c348?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            }
+        ];
+
+        // Panier
+        let cart = [];
+
+        // Éléments du DOM
+        const productsContainer = document.getElementById('products-container');
+        const cartButton = document.getElementById('cart-button');
+        const cartModal = document.getElementById('cart-modal');
+        const closeModal = document.querySelector('.close-modal');
+        const cartItemsContainer = document.getElementById('cart-items-container');
+        const cartTotalElement = document.getElementById('cart-total');
+        const cartCountElement = document.querySelector('.cart-count');
+
+        // Afficher les produits
+        function displayProducts() {
+            productsContainer.innerHTML = '';
+            products.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.className = 'product-card';
+                productElement.innerHTML = `
+                    <div class="product-image" data-id="${product.id}">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-price">${product.price.toLocaleString()} FCFA</p>
+                        <p class="product-description">${product.description}</p>
+                        <button class="add-to-cart" data-id="${product.id}">Ajouter au panier</button>
+                    </div>
+                `;
+                productsContainer.appendChild(productElement);
+            });
+
+            // Ajouter les événements aux boutons
+            document.querySelectorAll('.add-to-cart').forEach(button => {
+                button.addEventListener('click', addToCart);
+            });
+
+            // Ajouter les événements aux images
+            document.querySelectorAll('.product-image').forEach(image => {
+                image.addEventListener('click', function() {
+                    const productId = parseInt(this.getAttribute('data-id'));
+                    addToCart({ target: { getAttribute: () => productId } });
+                });
+            });
+        }
+
+        // Ajouter au panier
+        function addToCart(e) {
+            const productId = parseInt(typeof e === 'number' ? e : e.target.getAttribute('data-id'));
+            const product = products.find(p => p.id === productId);
+            
+            const existingItem = cart.find(item => item.id === productId);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    ...product,
+                    quantity: 1
+                });
+            }
+            
+            updateCart();
+            showCartNotification();
+        }
+
+        // Afficher la notification du panier
+        function showCartNotification() {
+            const notification = document.createElement('div');
+            notification.className = 'cart-notification';
+            notification.textContent = 'Produit ajouté au panier!';
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.right = '20px';
+            notification.style.backgroundColor = 'var(--primary-color)';
+            notification.style.color = 'white';
+            notification.style.padding = '10px 20px';
+            notification.style.borderRadius = '5px';
+            notification.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+            notification.style.zIndex = '1000';
+            notification.style.animation = 'fadeIn 0.3s';
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'fadeOut 0.3s';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 2000);
+            
+            // Ajouter les animations CSS
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes fadeIn {
+                    from { opacity: 0; transform: translateY(20px); }
+                    to { opacity: 1; transform: translateY(0); }
+                }
+                @keyframes fadeOut {
+                    from { opacity: 1; transform: translateY(0); }
+                    to { opacity: 0; transform: translateY(20px); }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
+        // Mettre à jour le panier
+        function updateCart() {
+            // Mettre à jour le compteur
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            cartCountElement.textContent = totalItems;
+            
+            // Mettre à jour le total
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            cartTotalElement.textContent = total.toLocaleString();
+            
+            // Mettre à jour les items du panier
+            cartItemsContainer.innerHTML = '';
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<tr><td colspan="5" style="text-align: center;">Votre panier est vide</td></tr>';
+            } else {
+                cart.forEach(item => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>
+                            <div style="display: flex; align-items: center;">
+                                <img src="${item.image}" alt="${item.name}" class="cart-item-image">
+                                <span style="margin-left: 10px;">${item.name}</span>
+                            </div>
+                        </td>
+                        <td>${item.price.toLocaleString()} FCFA</td>
+                        <td>
+                            <div class="quantity-control">
+                                <button class="quantity-btn minus" data-id="${item.id}">-</button>
+                                <input type="number" value="${item.quantity}" min="1" class="quantity-input" data-id="${item.id}">
+                                <button class="quantity-btn plus" data-id="${item.id}">+</button>
+                            </div>
+                        </td>
+                        <td>${(item.price * item.quantity).toLocaleString()} FCFA</td>
+                        <td><i class="fas fa-trash remove-item" data-id="${item.id}"></i></td>
+                    `;
+                    cartItemsContainer.appendChild(row);
+                });
+                
+                // Ajouter les événements
+                document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
+                    btn.addEventListener('click', decreaseQuantity);
+                });
+                document.querySelectorAll('.quantity-btn.plus').forEach(btn => {
+                    btn.addEventListener('click', increaseQuantity);
+                });
+                document.querySelectorAll('.quantity-input').forEach(input => {
+                    input.addEventListener('change', updateQuantity);
+                });
+                document.querySelectorAll('.remove-item').forEach(icon => {
+                    icon.addEventListener('click', removeItem);
+                });
+            }
+        }
+
+        // Augmenter la quantité
+        function increaseQuantity(e) {
+            const productId = parseInt(e.target.getAttribute('data-id'));
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                item.quantity += 1;
+                updateCart();
+            }
+        }
+
+        // Diminuer la quantité
+        function decreaseQuantity(e) {
+            const productId = parseInt(e.target.getAttribute('data-id'));
+            const item = cart.find(item => item.id === productId);
+            if (item && item.quantity > 1) {
+                item.quantity -= 1;
+                updateCart();
+            }
+        }
+
+        // Mettre à jour la quantité via l'input
+        function updateQuantity(e) {
+            const productId = parseInt(e.target.getAttribute('data-id'));
+            const newQuantity = parseInt(e.target.value);
+            
+            if (newQuantity >= 1) {
+                const item = cart.find(item => item.id === productId);
+                if (item) {
+                    item.quantity = newQuantity;
+                    updateCart();
+                }
+            }
+        }
+
+        // Supprimer un item
+        function removeItem(e) {
+            const productId = parseInt(e.target.getAttribute('data-id'));
+            cart = cart.filter(item => item.id !== productId);
+            updateCart();
+        }
+
+        // Gérer la commande
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Votre panier est vide!');
+                return;
+            }
+            
+            alert(`Commande passée avec succès! Total: ${cartTotalElement.textContent} FCFA\nMerci pour votre achat!`);
+            cart = [];
+            updateCart();
+            cartModal.style.display = 'none';
+        }
+
+        // Événements
+        cartButton.addEventListener('click', () => {
+            cartModal.style.display = 'flex';
+        });
+
+        closeModal.addEventListener('click', () => {
+            cartModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === cartModal) {
+                cartModal.style.display = 'none';
+            }
+        });
+
+        document.querySelector('.checkout-btn').addEventListener('click', checkout);
+
+        // Newsletter
+        document.getElementById('newsletter-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Merci pour votre abonnement à notre newsletter!');
+            e.target.reset();
+        });
+
+        // Initialisation
+        displayProducts();
+        updateCart();
+        // Au début de votre script, ajoutez :
+let currentUser = null;
+let orders = [];
+const adminEmail = "admin@biosenegal.com"; // Email de l'administrateur
+
+// Fonctions utilisateur
+function showLoginModal() {
+    document.getElementById('login-modal').style.display = 'flex';
+}
+
+function showRegisterModal() {
+    document.getElementById('login-modal').style.display = 'none';
+    document.getElementById('register-modal').style.display = 'flex';
+}
+
+function loginUser(email, password) {
+    // En réalité, vous devriez vérifier ces informations avec votre backend
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const user = users.find(u => u.email === email && u.password === password);
+    
+    if (user) {
+        currentUser = user;
+        alert('Connexion réussie!');
+        document.getElementById('login-modal').style.display = 'none';
+        
+        // Si c'est l'admin, montrer le lien vers le panel admin
+        if (user.email === adminEmail) {
+            document.getElementById('admin-panel-link').style.display = 'block';
+        }
+        
+        return true;
+    } else {
+        alert('Email ou mot de passe incorrect');
+        return false;
+    }
+}
+
+function registerUser(name, email, password, address) {
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    
+    // Vérifier si l'utilisateur existe déjà
+    if (users.some(u => u.email === email)) {
+        alert('Un compte avec cet email existe déjà');
+        return false;
+    }
+    
+    const newUser = {
+        id: Date.now(),
+        name,
+        email,
+        password,
+        address,
+        isAdmin: email === adminEmail
+    };
+    
+    users.push(newUser);
+    localStorage.setItem('users', JSON.stringify(users));
+    currentUser = newUser;
+    alert('Inscription réussie! Vous êtes maintenant connecté.');
+    document.getElementById('register-modal').style.display = 'none';
+    
+    return true;
+}
+
+function saveOrder() {
+    if (cart.length === 0) return;
+    
+    const order = {
+        id: Date.now(),
+        userId: currentUser ? currentUser.id : null,
+        userName: currentUser ? currentUser.name : "Guest",
+        userEmail: currentUser ? currentUser.email : null,
+        items: [...cart],
+        date: new Date().toISOString(),
+        total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+    };
+    
+    orders.push(order);
+    localStorage.setItem('orders', JSON.stringify(orders));
+}
+
+function displayOrders() {
+    const ordersList = document.getElementById('orders-list');
+    ordersList.innerHTML = '';
+    
+    if (orders.length === 0) {
+        ordersList.innerHTML = '<p>Aucune commande pour le moment</p>';
+        return;
+    }
+    
+    orders.sort((a, b) => new Date(b.date) - new Date(a.date)).forEach(order => {
+        const orderElement = document.createElement('div');
+        orderElement.className = 'order-card';
+        
+        const itemsList = order.items.map(item => 
+            `<div class="order-item">
+                <span>${item.name} (x${item.quantity})</span>
+                <span>${(item.price * item.quantity).toLocaleString()} FCFA</span>
+            </div>`
+        ).join('');
+        
+        orderElement.innerHTML = `
+            <div class="order-header">
+                <span class="order-user">${order.userName}</span>
+                <span class="order-date">${new Date(order.date).toLocaleString()}</span>
+            </div>
+            <div class="order-items">${itemsList}</div>
+            <div class="order-total">Total: ${order.total.toLocaleString()} FCFA</div>
+        `;
+        
+        ordersList.appendChild(orderElement);
+    });
+}
+
+// Modifiez la fonction checkout pour sauvegarder la commande
+function checkout() {
+    if (cart.length === 0) {
+        alert('Votre panier est vide!');
+        return;
+    }
+    
+    if (!currentUser) {
+        alert('Veuillez vous connecter pour passer commande');
+        showLoginModal();
+        return;
+    }
+    
+    saveOrder();
+    alert(`Commande passée avec succès! Total: ${cartTotalElement.textContent} FCFA\nMerci pour votre achat, ${currentUser.name}!`);
+    cart = [];
+    updateCart();
+    cartModal.style.display = 'none';
+}
+
+// Ajoutez ces écouteurs d'événements à la fin de votre script
+document.getElementById('show-register').addEventListener('click', (e) => {
+    e.preventDefault();
+    showRegisterModal();
+});
+
+document.getElementById('login-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+    loginUser(email, password);
+});
+
+document.getElementById('register-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('register-name').value;
+    const email = document.getElementById('register-email').value;
+    const password = document.getElementById('register-password').value;
+    const address = document.getElementById('register-address').value;
+    registerUser(name, email, password, address);
+});
+
+// Au chargement de la page, chargez les commandes
+window.addEventListener('DOMContentLoaded', () => {
+    orders = JSON.parse(localStorage.getItem('orders')) || [];
+    
+    // Si on est sur la page admin, afficher les commandes
+    if (window.location.hash === '#admin') {
+        document.getElementById('admin').style.display = 'block';
+        displayOrders();
+    }
+});
+    </script>
+</body>
+</html>
